@@ -1,0 +1,30 @@
+This is maybe a stupid trial
+
+Run result on Beagle Board
+    root@omap:/home/ubuntu/tom/test# insmod number_softirq.ko 
+    [ 9339.181365] tomxue: Hello, world
+    [ 9339.184936] tomxue: NR_SOFTIRQS is 10
+    
+
+Kernel source:
+    enum
+    {
+        HI_SOFTIRQ=0,
+        TIMER_SOFTIRQ,
+        NET_TX_SOFTIRQ,
+        NET_RX_SOFTIRQ,
+        BLOCK_SOFTIRQ,
+        BLOCK_IOPOLL_SOFTIRQ,
+        TASKLET_SOFTIRQ,
+        SCHED_SOFTIRQ,
+        HRTIMER_SOFTIRQ,
+        RCU_SOFTIRQ,    /* Preferable RCU should always be the last softirq */
+
+        NR_SOFTIRQS // should be 10
+    };
+
+Robert Love LKD3 Book:
+    定义了一个包含有32个该结构体的数组
+    static struct softirq_action softirq_vec[NR_SOFTIRQS] __cacheline_aligned_in_smp;
+
+So this is the reason why I did this trial.
